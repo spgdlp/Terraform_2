@@ -1,3 +1,7 @@
+variable "iam_user_name_prefix" {
+  default = "my_iam_user"
+}
+
 terraform {
   required_providers {
     aws = {
@@ -12,6 +16,6 @@ provider "aws" {
 
 resource "aws_iam_user" "my_iam_users" {
   count = 3
-  name =  "my-iam-user-${count.index}"
+  name =  "${var.iam_user_name_prefix}_${count.index}"
 }
 
