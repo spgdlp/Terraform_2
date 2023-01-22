@@ -12,6 +12,6 @@ provider "aws" {
 
 resource "aws_iam_user" "my_iam_users" {
   count = 3
-  name =  "my-iam-user-${count.index}"
+  name =  "my-iam-user"
 }
 
