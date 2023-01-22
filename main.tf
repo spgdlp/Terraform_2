@@ -1,6 +1,10 @@
-variable "iam_user_name_prefix" {
-  type = string  #any, number, bool, list, map, set, object, object
-  default = "my_iam_user_from_main" # Superpuesto por el fichero tfvars
+#variable "iam_user_name_prefix" {
+#  type = string  #any, number, bool, list, map, set, object, object
+#  default = "my_iam_user_from_main" # Superpuesto por el fichero tfvars
+#}
+
+variable "names" {
+  default = ["ranga","tom","jane"]
 }
 
 terraform {
@@ -15,8 +19,14 @@ provider "aws" {
   region = "eu-west-1"
 }
 
+#resource "aws_iam_user" "my_iam_users" {
+#  count = 3
+#  name =  "${var.iam_user_name_prefix}_${count.index}"
+# }
+
+
 resource "aws_iam_user" "my_iam_users" {
-  count = 3
-  name =  "${var.iam_user_name_prefix}_${count.index}"
+  count = length(var.names)
+  name =  var.names[count.index]
 }
 
