@@ -40,7 +40,7 @@ provider "aws" {
 resource "aws_iam_user" "my_iam_users" {
   for_each = var.names
   name = each.key
-  tag = {
+  tags = {
     country: each.value
   }
 }
