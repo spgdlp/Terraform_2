@@ -5,9 +5,9 @@
 
 variable "names" {
   default = {
-    ranga : "Netherlands",
-    tom: "USA",
-   jane: "Germany"
+    ranga : { country: "Netherlands", department : "Dev"},
+    tom: { country: "USA", department: "Prod"},
+   jane: { country: "Germany", department: "Explot"}
   }
 }
 
@@ -41,6 +41,7 @@ resource "aws_iam_user" "my_iam_users" {
   for_each = var.names
   name = each.key
   tags = {
-    country: each.value
+    country: each.value.country
+    department: each.value.department
   }
 }
